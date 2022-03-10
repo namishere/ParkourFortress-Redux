@@ -47,7 +47,7 @@ float g_flStockAirAccel;
 float g_flAccel[TF_MAXPLAYERS] = {10.0, 10.0, ...};
 float g_flStockAccel;
 
-float g_flMaxSpeedVal;
+float g_flMaxSpeedVal = 5200.0;
 
 #if defined DEBUGROPES
 ConVar g_cvarDebugRopes;

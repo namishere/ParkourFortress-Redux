@@ -43,12 +43,12 @@ ArrayList Config_LoadWeaponData()
 				wep.iIndex = StringToInt(sBuffer);
 				
 				kv.GetString("rarity", sBuffer, sizeof(sBuffer), "common");
-				CStrToLower(sBuffer);
+				MC_StrToLower(sBuffer);
 				
 				mRarity.GetValue(sBuffer, wep.nRarity);
 				
 				kv.GetString("slot", sBuffer, sizeof(sBuffer), "invalid");
-				CStrToLower(sBuffer);
+				MC_StrToLower(sBuffer);
 				
 				mSlot.GetValue(sBuffer, wep.iSlot);
 				

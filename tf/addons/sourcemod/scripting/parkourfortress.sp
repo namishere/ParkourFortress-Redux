@@ -200,8 +200,6 @@ public void OnAllPluginsLoaded()
 {
 	AddCommandListener(BlockCYOA, "cyoa_pda_open");
 	AddCommandListener(Command_VoiceMenu, "voicemenu");
-
-	FindConVar("tf_maxspeed_limit").SetFloat(5200.00);
 }
 
 public void OnWeaponRespawnSet(ConVar cvarTime, const char[] strOldValue, const char[] strNewValue)
@@ -277,7 +275,7 @@ void ProcessClientRopeCvars(QueryCookie cookie, int iClient, ConVarQueryResult r
 	if (!StrEqual(cvarValue, "1"))
 	{
 		CPFRopeController.SpawnRopeBeams(iClient);
-		CPrintToChat(iClient, "{fullred}Please type {green}%s 1{fullred} in console in order to see ropes correctly! Add {green}%s 1{fullred} at the very end of your cfg/autoexec.cfg and restart your game.", cvarName);
+		MC_PrintToChat(iClient, "{fullred}Please type {green}%s 1{fullred} in console in order to see ropes correctly! Add {green}%s 1{fullred} at the very end of your cfg/autoexec.cfg and restart your game.", cvarName);
 	}
 }
 
@@ -289,7 +287,7 @@ void CheckClientDownloadCvar(int iClient)
 void ProcessClientDownloadCvar(QueryCookie cookie, int iClient, ConVarQueryResult result, const char[] cvarName, const char[] cvarValue)
 {
 	if (!StrEqual(cvarValue, "all"))
-		CPrintToChat(iClient, "{fullred}Please allow all downloads in the multiplayer options menu!", cvarName);
+		MC_PrintToChat(iClient, "{fullred}Please allow all downloads in the multiplayer options menu!", cvarName);
 }
 
 public Action ToggleMusic(int iClient, int iArgs)
@@ -398,7 +396,7 @@ public Action RestartTutorial(int iClient, int iArgs)
 	
 	if (!IsPlayerAlive(iClient) || TF2_GetClientTeam(iClient) == TFTeam_Spectator || TF2_GetClientTeam(iClient) == TFTeam_Unassigned)
 	{
-		CReplyToCommand(iClient, "{red}You must be alive and on a team to start the tutorial!");
+		MC_ReplyToCommand(iClient, "{red}You must be alive and on a team to start the tutorial!");
 		return Plugin_Handled;
 	}
 	
@@ -413,7 +411,7 @@ public Action SkipTutorial(int iClient, int iArgs)
 	
 	if (!IsPlayerAlive(iClient) || TF2_GetClientTeam(iClient) == TFTeam_Spectator || TF2_GetClientTeam(iClient) == TFTeam_Unassigned)
 	{
-		CReplyToCommand(iClient, "{red}You must be alive and on a team to skip the tutorial!");
+		MC_ReplyToCommand(iClient, "{red}You must be alive and on a team to skip the tutorial!");
 		return Plugin_Handled;
 	}
 	
@@ -824,7 +822,7 @@ void ApplyMaxSpeedPatch()
 	g_pPatchLocation = Address_Null;
 	g_iRestoreData = 0;
 
-	Handle hGameData = LoadGameConfigFile("tf.maxspeed");
+	Handle hGameData = LoadGameConfigFile("parkourdata");
 	if (hGameData == INVALID_HANDLE)
 	{
 		LogError("Failed to load maxspeed patch: Missing gamedata/tf.maxspeed.txt");
